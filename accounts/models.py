@@ -12,4 +12,12 @@ class CustomUser(AbstractUser):
         (SALES, "Vente"),
         (SUPPORT, "Support"),
     )
-    team = models.CharField(max_length=30, choices=TEAM_CHOICES, verbose_name="Equipe")
+    team = models.CharField(
+        max_length=30, choices=TEAM_CHOICES, verbose_name="Equipe"
+    )
+
+    class Meta:
+        verbose_name_plural = "Utilisateurs"
+
+    def __str__(self):
+        return f"{self.username} / {self.first_name} {self.last_name}"

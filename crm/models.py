@@ -2,9 +2,11 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 
+User = get_user_model()
+
 
 def get_sentinel_user():
-    return get_user_model().objects.get_or_create(username="deleted")[0]
+    return User.objects.get_or_create(username="deleted")[0]
 
 
 class Client(models.Model):
@@ -22,6 +24,19 @@ class Client(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.company_name} / {self.first_name} {self.last_name}"
+
+
+class ContractStatus(models.Model):
+    state = models.CharField(max_length=30)
+
+    class Meta:
+        verbose_name_plural = "Status contrat"
+
+    def __str__(self):
+        return self.state
+
 
 class Contract(models.Model):
     sales_contact = models.ForeignKey(
@@ -32,24 +47,21 @@ class Contract(models.Model):
     client = models.ForeignKey(
         to=Client, on_delete=models.CASCADE, related_name="contract"
     )
-    status = models.BooleanField()
+    status = models.ForeignKey(to=ContractStatus, on_delete=models.PROTECT)
     amount = models.FloatField()
     payment_due = models.DateTimeField
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Contrats"
+
+    def __str__(self):
+        return f"{self.client.company_name} / {self.sales_contact.username} \
+                 / {self.id}"
+
 
 class Event(models.Model):
-    TO_ORGANIZE = "TO_ORGANIZE"
-    IN_PROGRESS = "IN_PROGRESS"
-    COMPLETED = "COMPLETED"
-
-    STATUS_CHOICES = (
-        (TO_ORGANIZE, "A organiser"),
-        (IN_PROGRESS, "En cours"),
-        (COMPLETED, "Terminé"),
-    )
-
     contract = models.ForeignKey(
         to=Contract, on_delete=models.CASCADE, related_name="event"
     )
@@ -59,10 +71,15 @@ class Event(models.Model):
         related_name="organized_event",
     )
     event_date = models.DateTimeField()
-    status = models.CharField(
-        max_length=30, choices=STATUS_CHOICES, verbose_name="Statut"
-    )
+    status = models.BooleanField(verbose_name="Statut")
     attendees = models.IntegerField()
     notes = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Evénements"
+
+    def __str__(self):
+        return f"{self.contract.client.company_name} / {self.support_contact.username} \
+                 / {self.event_date}"
