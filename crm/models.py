@@ -39,17 +39,17 @@ class ContractStatus(models.Model):
 
 
 class Contract(models.Model):
+    client = models.ForeignKey(
+        to=Client, on_delete=models.CASCADE, related_name="contract"
+    )
     sales_contact = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.SET(get_sentinel_user),
         related_name="signed_contract",
     )
-    client = models.ForeignKey(
-        to=Client, on_delete=models.CASCADE, related_name="contract"
-    )
     status = models.ForeignKey(to=ContractStatus, on_delete=models.PROTECT)
     amount = models.FloatField()
-    payment_due = models.DateTimeField
+    payment_due = models.DateTimeField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -57,8 +57,7 @@ class Contract(models.Model):
         verbose_name_plural = "Contrats"
 
     def __str__(self):
-        return f"{self.client.company_name} / {self.sales_contact.username} \
-                 / {self.id}"
+        return f"{self.client.company_name} / {self.sales_contact.username} / {self.id}"
 
 
 class Event(models.Model):
@@ -81,5 +80,4 @@ class Event(models.Model):
         verbose_name_plural = "Evénements"
 
     def __str__(self):
-        return f"{self.contract.client.company_name} / {self.support_contact.username} \
-                 / {self.event_date}"
+        return f"{self.contract.client.company_name} / {self.support_contact.username} / {self.event_date}"
