@@ -25,7 +25,7 @@ class Client(models.Model):
     date_updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.company_name} / {self.first_name} {self.last_name}"
+        return f"{self.company_name} / {self.first_name} {self.last_name} / {self.sales_contact.username}"
 
 
 class ContractStatus(models.Model):
@@ -56,6 +56,10 @@ class Contract(models.Model):
     class Meta:
         verbose_name_plural = "Contrats"
 
+    def save(self, *args, **kwargs):
+        self.sales_contact = self.client.sales_contact
+        return super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.client.company_name} / {self.sales_contact.username} / {self.id}"
 
@@ -80,4 +84,4 @@ class Event(models.Model):
         verbose_name_plural = "Evénements"
 
     def __str__(self):
-        return f"{self.contract.client.company_name} / {self.support_contact.username} / {self.event_date}"
+        return f"{self.contract.client.company_name} / {self.support_contact.username} / {self.notes[:30]}"
