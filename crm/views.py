@@ -3,7 +3,11 @@ from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 from django.db.models import Q
 
-from crm.permissions import IsSalesContact, IsClientSupportContact
+from crm.permissions_sales import IsClientSalesContact, IsEventSalesContact
+from crm.permissions_support import (
+    IsClientSupportContact,
+    IsEventSupportContact,
+)
 
 from crm.models import Client, Contract, Event
 from crm.serializers import (
@@ -23,7 +27,7 @@ class ClientViewset(ModelViewSet):
     permission_classes = [
         IsAuthenticated
         & DjangoModelPermissions
-        & (IsSalesContact | IsClientSupportContact)
+        & (IsClientSalesContact | IsClientSupportContact)
     ]
 
     def get_queryset(self):
@@ -31,7 +35,7 @@ class ClientViewset(ModelViewSet):
         return Client.objects.filter(
             Q(sales_contact=auth_user)
             | Q(contract__event__support_contact=auth_user)
-        )
+        ).distinct()
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -44,13 +48,17 @@ class ContractViewset(ModelViewSet):
 
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
-    permission_classes = [IsAuthenticated, DjangoModelPermissions]
+    permission_classes = [
+        IsAuthenticated,
+        DjangoModelPermissions,
+        IsClientSalesContact,
+    ]
 
     def get_queryset(self):
-        queryset = Contract.objects.all()
+        queryset = Contract.objects.filter(sales_contact=self.request.user)
         amount = self.request.GET.get("amount")
         if amount:
-            queryset = Contract.objects.filter(amount=amount)
+            queryset = queryset.filter(amount=amount)
         return queryset
 
     def get_serializer_class(self):
@@ -64,10 +72,21 @@ class EventViewset(ModelViewSet):
 
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
-    permission_classes = [IsAuthenticated, DjangoModelPermissions]
+    permission_classes = [
+        IsAuthenticated
+        & DjangoModelPermissions
+        & (IsEventSalesContact | IsEventSupportContact)
+    ]
 
     def get_queryset(self):
-        return Event.objects.all()
+        queryset = Event.objects.filter(
+            Q(support_contact=self.request.user)
+            | Q(contract__sales_contact=self.request.user)
+        ).distinct()
+        event_date = self.request.GET.get("date")
+        if event_date:
+            queryset = queryset.filter(event_date__contains=event_date)
+        return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
