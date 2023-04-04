@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
@@ -20,6 +22,16 @@ from crm.serializers import (
 )
 
 
+def convert_date(date):
+    """Convert French date format to the English one."""
+    list_date = date.split("-")
+    if len(list_date) == 2:
+        date = list_date[1] + "-" + list_date[0]
+    if len(list_date) == 3:
+        date = list_date[2] + "-" + list_date[1] + "-" + list_date[0]
+    return date
+
+
 class ClientViewset(ModelViewSet):
 
     serializer_class = ClientListSerializer
@@ -32,10 +44,17 @@ class ClientViewset(ModelViewSet):
 
     def get_queryset(self):
         auth_user = self.request.user
-        return Client.objects.filter(
+        queryset = Client.objects.filter(
             Q(sales_contact=auth_user)
             | Q(contract__event__support_contact=auth_user)
         ).distinct()
+        company = self.request.query_params.get("company")
+        if company:
+            queryset = queryset.filter(company_name__icontains=company)
+        email = self.request.query_params.get("email")
+        if email:
+            queryset = queryset.filter(email__icontains=email)
+        return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -56,7 +75,17 @@ class ContractViewset(ModelViewSet):
 
     def get_queryset(self):
         queryset = Contract.objects.filter(sales_contact=self.request.user)
-        amount = self.request.GET.get("amount")
+        company = self.request.query_params.get("company")
+        if company:
+            queryset = queryset.filter(client__company_name__icontains=company)
+        email = self.request.query_params.get("email")
+        if email:
+            queryset = queryset.filter(client__email__icontains=email)
+        contract_date = self.request.query_params.get("date")
+        if contract_date:
+            contract_date = convert_date(contract_date)
+            queryset = queryset.filter(date_created__contains=contract_date)
+        amount = self.request.query_params.get("amount")
         if amount:
             queryset = queryset.filter(amount=amount)
         return queryset
@@ -83,8 +112,19 @@ class EventViewset(ModelViewSet):
             Q(support_contact=self.request.user)
             | Q(contract__sales_contact=self.request.user)
         ).distinct()
-        event_date = self.request.GET.get("date")
+        company = self.request.query_params.get("company")
+        if company:
+            queryset = queryset.filter(
+                contract__client__company_name__icontains=company
+            )
+        email = self.request.query_params.get("email")
+        if email:
+            queryset = queryset.filter(
+                contract__client__email__icontains=email
+            )
+        event_date = self.request.query_params.get("date")
         if event_date:
+            event_date = convert_date(event_date)
             queryset = queryset.filter(event_date__contains=event_date)
         return queryset
 
