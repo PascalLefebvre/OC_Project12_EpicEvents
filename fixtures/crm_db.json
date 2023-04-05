@@ -1,109 +1,5 @@
 [
 {
-    "model": "admin.logentry",
-    "pk": 1,
-    "fields": {
-        "action_time": "2023-03-28T12:11:03.875Z",
-        "user": 1,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "ContractStatus object (1)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 2,
-    "fields": {
-        "action_time": "2023-03-28T12:11:25.303Z",
-        "user": 1,
-        "content_type": 9,
-        "object_id": "2",
-        "object_repr": "ContractStatus object (2)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 3,
-    "fields": {
-        "action_time": "2023-03-28T12:12:45.810Z",
-        "user": 1,
-        "content_type": 9,
-        "object_id": "3",
-        "object_repr": "ContractStatus object (3)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 4,
-    "fields": {
-        "action_time": "2023-03-28T12:13:11.695Z",
-        "user": 1,
-        "content_type": 9,
-        "object_id": "4",
-        "object_repr": "ContractStatus object (4)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 5,
-    "fields": {
-        "action_time": "2023-03-28T12:16:27.868Z",
-        "user": 1,
-        "content_type": 8,
-        "object_id": "1",
-        "object_repr": "Mj2T / vente01                  / 1",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 6,
-    "fields": {
-        "action_time": "2023-03-28T12:16:38.488Z",
-        "user": 1,
-        "content_type": 8,
-        "object_id": "2",
-        "object_repr": "E-sport & Co / vente02                  / 2",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 7,
-    "fields": {
-        "action_time": "2023-03-28T12:26:44.866Z",
-        "user": 1,
-        "content_type": 10,
-        "object_id": "2",
-        "object_repr": "Mj2T / support01                  / 2023-06-21 21:00:00+00:00",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 8,
-    "fields": {
-        "action_time": "2023-03-28T12:30:28.629Z",
-        "user": 1,
-        "content_type": 10,
-        "object_id": "3",
-        "object_repr": "E-sport & Co / support02                  / 2023-08-15 12:00:00+00:00",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -464,15 +360,86 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add Token",
+        "content_type": 11,
+        "codename": "add_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change Token",
+        "content_type": 11,
+        "codename": "change_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete Token",
+        "content_type": 11,
+        "codename": "delete_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view Token",
+        "content_type": 11,
+        "codename": "view_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add token",
+        "content_type": 12,
+        "codename": "add_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change token",
+        "content_type": 12,
+        "codename": "change_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete token",
+        "content_type": 12,
+        "codename": "delete_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view token",
+        "content_type": 12,
+        "codename": "view_tokenproxy"
+    }
+},
+{
     "model": "auth.group",
     "pk": 1,
     "fields": {
         "name": "support",
         "permissions": [
             28,
-            32,
-            34,
-            36
+            38,
+            40
         ]
     }
 },
@@ -488,8 +455,9 @@
             29,
             30,
             32,
-            33,
-            36
+            37,
+            38,
+            40
         ]
     }
 },
@@ -574,11 +542,51 @@
     }
 },
 {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "token"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "tokenproxy"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "4k202yjwg6kv9pdy633mz7jsyoddlytv",
+    "fields": {
+        "session_data": ".eJxVjEEOgjAQRe_StWloLVPGpXvOQKadGUFNSSisjHdXEha6_e_99zIDbes4bFWWYWJzMc6cfrdE-SFlB3yncpttnsu6TMnuij1otf3M8rwe7l9gpDru2RRFW25YG4-B0SdlREUNocuJwAcQBy2pI1WQswfsuojfD4hEQfP-AABMOJg:1pk4F9:WNypCkbR6qZFLh5jWSGEynZVUh17dN9rvYnWWw1JRaI",
+        "expire_date": "2023-04-19T14:36:11.558Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "42bd9a4d86c7e9dd908a6ff35364a8864002a84f",
+    "fields": {
+        "user": 10,
+        "created": "2023-04-05T12:11:46.743Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "cdfaaa860c46795751bcbd0d537cf0c429d3566a",
+    "fields": {
+        "user": 4,
+        "created": "2023-04-05T07:54:33.572Z"
+    }
+},
+{
     "model": "accounts.customuser",
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$390000$w8akQqTwe0TcWnbe5bangI$VMqN27PggTaWoYZAbdVxVYj7XXLhRb0CGZuMBtz9fuo=",
-        "last_login": "2023-03-28T12:07:25.220Z",
+        "last_login": "2023-04-05T14:36:11.557Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -587,7 +595,6 @@
         "is_staff": true,
         "is_active": true,
         "date_joined": "2023-03-27T14:27:48.677Z",
-        "team": "",
         "groups": [],
         "user_permissions": []
     }
@@ -597,7 +604,7 @@
     "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$390000$Qwfln2HpHuAG1ogMvKF5sF$r77pF1YeASnYlVs85rODz5LrGSG8JrFR5DHbYj07rKU=",
-        "last_login": "2023-03-28T08:00:57.718Z",
+        "last_login": "2023-04-05T09:39:49.355Z",
         "is_superuser": true,
         "username": "gestion01",
         "first_name": "gestion",
@@ -606,7 +613,6 @@
         "is_staff": true,
         "is_active": true,
         "date_joined": "2023-03-27T15:00:53Z",
-        "team": "MANAGEMENT",
         "groups": [],
         "user_permissions": []
     }
@@ -616,16 +622,15 @@
     "pk": 3,
     "fields": {
         "password": "pbkdf2_sha256$390000$nzZLkTuKrvPiks4Q4qi7Ht$02UA3jZoNCZFPjYIBDuP+ei1XSZyVPMc0v8R9lw0vOk=",
-        "last_login": "2023-03-28T07:48:48Z",
+        "last_login": "2023-04-05T13:45:33Z",
         "is_superuser": false,
         "username": "vente01",
         "first_name": "vente",
         "last_name": "01",
         "email": "vente.01@email.com",
-        "is_staff": true,
+        "is_staff": false,
         "is_active": true,
         "date_joined": "2023-03-27T15:02:18Z",
-        "team": "SALES",
         "groups": [
             2
         ],
@@ -637,23 +642,19 @@
     "pk": 4,
     "fields": {
         "password": "pbkdf2_sha256$390000$jJrfBDfhwnCXZytDwggcAI$sGzVcSouiCcw2B/rsBe3fqNOv99QmGY8Vzu41qYrExc=",
-        "last_login": "2023-03-28T07:22:01Z",
+        "last_login": "2023-04-05T07:54:33Z",
         "is_superuser": false,
         "username": "support01",
         "first_name": "support",
         "last_name": "01",
         "email": "support.01@email.com",
-        "is_staff": true,
+        "is_staff": false,
         "is_active": true,
         "date_joined": "2023-03-27T15:03:47Z",
-        "team": "SUPPORT",
         "groups": [
             1
         ],
-        "user_permissions": [
-            34,
-            36
-        ]
+        "user_permissions": []
     }
 },
 {
@@ -661,16 +662,15 @@
     "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$390000$MDFckXKLOvVNjHi2sfR6Us$HSftmkl81qdu8QHdQujWXhZqDA1hBYqKlQSDJtC2wHs=",
-        "last_login": "2023-03-28T08:11:02.661Z",
+        "last_login": "2023-04-03T14:53:23Z",
         "is_superuser": false,
         "username": "vente02",
         "first_name": "vente",
         "last_name": "02",
         "email": "vente.02@email.com",
-        "is_staff": true,
+        "is_staff": false,
         "is_active": true,
         "date_joined": "2023-03-28T07:44:43Z",
-        "team": "SALES",
         "groups": [
             2
         ],
@@ -691,7 +691,6 @@
         "is_staff": true,
         "is_active": true,
         "date_joined": "2023-03-28T07:57:05Z",
-        "team": "MANAGEMENT",
         "groups": [],
         "user_permissions": []
     }
@@ -701,17 +700,58 @@
     "pk": 7,
     "fields": {
         "password": "pbkdf2_sha256$390000$bM9QKnwjTOnoGRoYkX1RU2$guuEiF71Rg5OXv8WBg8M0Y7mesWH5MSMn5NVFPvbcbk=",
-        "last_login": "2023-03-28T08:11:14.507Z",
+        "last_login": "2023-04-05T13:43:33Z",
         "is_superuser": false,
         "username": "support02",
         "first_name": "support",
         "last_name": "02",
         "email": "support.02@email.com",
-        "is_staff": true,
+        "is_staff": false,
         "is_active": true,
         "date_joined": "2023-03-28T07:58:06Z",
-        "team": "SUPPORT",
-        "groups": [],
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$WGKQ2iIpFqwZ1GWgJpeWTQ$iDYdbaizVH8CPoz7rF0EQVL5zEj4V/xErm2MKT3RqYc=",
+        "last_login": "2023-04-05T13:06:55Z",
+        "is_superuser": false,
+        "username": "vente03",
+        "first_name": "vente",
+        "last_name": "03",
+        "email": "vente.03@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-05T09:47:36Z",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$3ECBGZi7qfAt1GHG9BUJ0K$9V5gMEiWsnMAnYQUH0QuI5VWCrp5Yl/rHse80mTCpNk=",
+        "last_login": "2023-04-05T12:11:46Z",
+        "is_superuser": false,
+        "username": "support03",
+        "first_name": "support",
+        "last_name": "03",
+        "email": "support.03@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-05T09:49:14Z",
+        "groups": [
+            1
+        ],
         "user_permissions": []
     }
 },
@@ -746,6 +786,66 @@
     }
 },
 {
+    "model": "crm.client",
+    "pk": 3,
+    "fields": {
+        "company_name": "UBI Logiciels",
+        "first_name": "Xavier",
+        "last_name": "Boss",
+        "email": "xavier.boss@email.com",
+        "phone": "0608101214",
+        "mobile": "0608101214",
+        "sales_contact": 3,
+        "date_created": "2023-03-28T14:58:40.697Z",
+        "date_updated": "2023-03-28T14:58:40.697Z"
+    }
+},
+{
+    "model": "crm.client",
+    "pk": 4,
+    "fields": {
+        "company_name": "Biotech",
+        "first_name": "Christine",
+        "last_name": "Plantiers",
+        "email": "christine.plantiers@email.com",
+        "phone": "0709111315",
+        "mobile": "0709111315",
+        "sales_contact": 5,
+        "date_created": "2023-03-28T15:01:38.865Z",
+        "date_updated": "2023-03-28T15:01:38.865Z"
+    }
+},
+{
+    "model": "crm.client",
+    "pk": 5,
+    "fields": {
+        "company_name": "Company01",
+        "first_name": "first01",
+        "last_name": "last01",
+        "email": "first01.last01@email.com",
+        "phone": "0506070810",
+        "mobile": "0612244896",
+        "sales_contact": 5,
+        "date_created": "2023-03-31T08:37:11.682Z",
+        "date_updated": "2023-03-31T08:37:11.682Z"
+    }
+},
+{
+    "model": "crm.client",
+    "pk": 6,
+    "fields": {
+        "company_name": "Company02",
+        "first_name": "first02",
+        "last_name": "last02",
+        "email": "first02.last02@email.com",
+        "phone": "0515478932",
+        "mobile": "0645897123",
+        "sales_contact": 5,
+        "date_created": "2023-03-31T09:04:06.516Z",
+        "date_updated": "2023-03-31T09:04:06.516Z"
+    }
+},
+{
     "model": "crm.contractstatus",
     "pk": 1,
     "fields": {
@@ -777,10 +877,11 @@
     "model": "crm.contract",
     "pk": 1,
     "fields": {
-        "sales_contact": 3,
         "client": 1,
-        "status": 1,
+        "sales_contact": 3,
+        "status": 2,
         "amount": 2000.0,
+        "payment_due": "2023-05-31T00:00:00Z",
         "date_created": "2023-03-28T12:16:27.867Z",
         "date_updated": "2023-03-28T12:16:27.867Z"
     }
@@ -789,12 +890,65 @@
     "model": "crm.contract",
     "pk": 2,
     "fields": {
-        "sales_contact": 5,
         "client": 2,
-        "status": 1,
+        "sales_contact": 5,
+        "status": 2,
         "amount": 5000.0,
+        "payment_due": "2023-07-31T00:00:00Z",
         "date_created": "2023-03-28T12:16:38.486Z",
         "date_updated": "2023-03-28T12:16:38.486Z"
+    }
+},
+{
+    "model": "crm.contract",
+    "pk": 3,
+    "fields": {
+        "client": 3,
+        "sales_contact": 3,
+        "status": 2,
+        "amount": 10000.0,
+        "payment_due": "2023-04-17T00:00:00Z",
+        "date_created": "2023-03-28T15:06:29.235Z",
+        "date_updated": "2023-03-28T15:06:29.235Z"
+    }
+},
+{
+    "model": "crm.contract",
+    "pk": 4,
+    "fields": {
+        "client": 4,
+        "sales_contact": 5,
+        "status": 2,
+        "amount": 15000.0,
+        "payment_due": "2023-03-31T00:00:00Z",
+        "date_created": "2023-03-28T15:06:46.123Z",
+        "date_updated": "2023-03-28T15:06:46.123Z"
+    }
+},
+{
+    "model": "crm.contract",
+    "pk": 5,
+    "fields": {
+        "client": 4,
+        "sales_contact": 5,
+        "status": 1,
+        "amount": 20000.0,
+        "payment_due": "2023-05-15T00:00:00Z",
+        "date_created": "2023-03-31T06:52:56.238Z",
+        "date_updated": "2023-03-31T06:52:56.238Z"
+    }
+},
+{
+    "model": "crm.contract",
+    "pk": 6,
+    "fields": {
+        "client": 3,
+        "sales_contact": 3,
+        "status": 1,
+        "amount": 5000.0,
+        "payment_due": "2023-04-14T00:00:00Z",
+        "date_created": "2023-03-31T07:21:09.042Z",
+        "date_updated": "2023-03-31T07:21:09.042Z"
     }
 },
 {
@@ -823,6 +977,34 @@
         "notes": "Garden party avec feu d'artifice en soirée.\r\nProximité piscine (à sécuriser).\r\nRepas spectacle à prévoir.",
         "date_created": "2023-03-28T12:30:28.628Z",
         "date_updated": "2023-03-28T12:30:28.628Z"
+    }
+},
+{
+    "model": "crm.event",
+    "pk": 4,
+    "fields": {
+        "contract": 3,
+        "support_contact": 4,
+        "event_date": "2023-05-01T12:00:00Z",
+        "status": true,
+        "attendees": 50,
+        "notes": "Journée de cohésion d'équipe.\r\nMultiples activités sportives en extérieur.\r\nPrévoir solution de repli si mauvais temps (gymnase).",
+        "date_created": "2023-03-28T15:10:15.748Z",
+        "date_updated": "2023-03-28T15:10:15.748Z"
+    }
+},
+{
+    "model": "crm.event",
+    "pk": 5,
+    "fields": {
+        "contract": 4,
+        "support_contact": 4,
+        "event_date": "2023-04-10T09:00:00Z",
+        "status": true,
+        "attendees": 120,
+        "notes": "Journée portes ouvertes jusqu'à 19h.\r\nPetit-déjeûner et buffet dînatoire le midi.\r\nOrganisation de conférences avec inscription préalable.",
+        "date_created": "2023-03-29T07:05:35.894Z",
+        "date_updated": "2023-03-29T07:05:35.895Z"
     }
 }
 ]

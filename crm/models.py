@@ -46,6 +46,7 @@ class Contract(models.Model):
         to=settings.AUTH_USER_MODEL,
         on_delete=models.SET(get_sentinel_user),
         related_name="signed_contract",
+        default=0,
     )
     status = models.ForeignKey(to=ContractStatus, on_delete=models.PROTECT)
     amount = models.FloatField()
@@ -61,7 +62,7 @@ class Contract(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.client.company_name} / {self.sales_contact.username} / {self.id}"
+        return f"{self.client.company_name} / {self.sales_contact.username}"
 
 
 class Event(models.Model):

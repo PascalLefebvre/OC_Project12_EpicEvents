@@ -1,21 +1,10 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.contrib.auth.models import AbstractUser, Group
+
+sales_group = Group.objects.get(name="vente")
+support_group = Group.objects.get(name="support")
 
 
 class CustomUser(AbstractUser):
-    MANAGEMENT = "MANAGEMENT"
-    SALES = "SALES"
-    SUPPORT = "SUPPORT"
-
-    TEAM_CHOICES = (
-        (MANAGEMENT, "Gestion"),
-        (SALES, "Vente"),
-        (SUPPORT, "Support"),
-    )
-    team = models.CharField(
-        max_length=30, choices=TEAM_CHOICES, verbose_name="Equipe"
-    )
-
     class Meta:
         verbose_name_plural = "Utilisateurs"
 
