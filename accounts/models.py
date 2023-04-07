@@ -1,7 +1,4 @@
-from django.contrib.auth.models import AbstractUser, Group
-
-sales_group = Group.objects.get(name="vente")
-support_group = Group.objects.get(name="support")
+from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):

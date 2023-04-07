@@ -1,6 +1,6 @@
-from rest_framework import permissions
+from django.contrib.auth.models import Group
 
-from accounts.models import sales_group
+from rest_framework import permissions
 
 
 class IsClientSalesContact(permissions.BasePermission):
@@ -9,6 +9,7 @@ class IsClientSalesContact(permissions.BasePermission):
     message = "You're not allowed because you're not the sales contact of the client."
 
     def has_permission(self, request, view):
+        sales_group = Group.objects.get(name="vente")
         if sales_group in request.user.groups.all():
             return True
         self.message = "You're not allowed because you're not a sales contact."
@@ -27,6 +28,7 @@ class IsEventSalesContact(permissions.BasePermission):
     message = "You're not allowed because you're not the sales contact of the event client."
 
     def has_permission(self, request, view):
+        sales_group = Group.objects.get(name="vente")
         if sales_group in request.user.groups.all():
             return True
         self.message = "You're not allowed because you're not a sales contact."

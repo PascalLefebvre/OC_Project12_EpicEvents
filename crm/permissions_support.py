@@ -1,6 +1,6 @@
-from rest_framework import permissions
+from django.contrib.auth.models import Group
 
-from accounts.models import support_group
+from rest_framework import permissions
 
 
 class IsClientSupportContact(permissions.BasePermission):
@@ -15,6 +15,7 @@ class IsClientSupportContact(permissions.BasePermission):
         return False
 
     def has_permission(self, request, view):
+        support_group = Group.objects.get(name="support")
         if support_group in request.user.groups.all():
             if request.method in permissions.SAFE_METHODS:
                 return True
@@ -36,6 +37,7 @@ class IsEventSupportContact(permissions.BasePermission):
     message = "You're not allowed because you're not the support contact of the event."
 
     def has_permission(self, request, view):
+        support_group = Group.objects.get(name="support")
         if support_group in request.user.groups.all():
             if request.method not in ["POST"]:
                 return True
