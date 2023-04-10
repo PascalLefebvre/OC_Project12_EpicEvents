@@ -1,6 +1,8 @@
+from datetime import datetime
 import logging
 
 from django.db.models import Q
+from django.http import Http404
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
@@ -26,18 +28,17 @@ logging.basicConfig(
 )
 
 
-def convert_date(date):
-    """Convert French date format to the English one."""
-    list_date = date.split("-")
-    if len(list_date) == 2:
-        date = list_date[1] + "-" + list_date[0]
-    if len(list_date) == 3:
-        date = list_date[2] + "-" + list_date[1] + "-" + list_date[0]
-    return date
+def filter_queryset_by_datetime(queryset, date):
+    """"""
+    datetime_start = datetime.strptime(date + " 00:00:00", "%Y-%m-%d %H:%M:%S")
+    datetime_end = datetime.strptime(date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+    queryset = queryset.filter(
+        date_created__range=(datetime_start, datetime_end)
+    )
+    return queryset
 
 
 class ClientViewset(ModelViewSet):
-
     serializer_class = ClientListSerializer
     detail_serializer_class = ClientDetailSerializer
     permission_classes = [
@@ -70,7 +71,6 @@ class ClientViewset(ModelViewSet):
 
 
 class ContractViewset(ModelViewSet):
-
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
     permission_classes = [
@@ -90,8 +90,21 @@ class ContractViewset(ModelViewSet):
             queryset = queryset.filter(client__email__icontains=email)
         contract_date = self.request.query_params.get("date")
         if contract_date:
-            contract_date = convert_date(contract_date)
-            queryset = queryset.filter(date_created__contains=contract_date)
+            try:
+                datetime_start = datetime.strptime(
+                    contract_date + " 00:00:00", "%Y-%m-%d %H:%M:%S"
+                )
+                datetime_end = datetime.strptime(
+                    contract_date + " 23:59:59", "%Y-%m-%d %H:%M:%S"
+                )
+                queryset = queryset.filter(
+                    date_created__range=(datetime_start, datetime_end)
+                )
+            except ValueError:
+                logging.error(
+                    f"Invalid date format in the contracts search request : {contract_date}"
+                )
+                raise Http404
         amount = self.request.query_params.get("amount")
         if amount:
             queryset = queryset.filter(amount=amount)
@@ -106,7 +119,6 @@ class ContractViewset(ModelViewSet):
 
 
 class EventViewset(ModelViewSet):
-
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
     permission_classes = [
@@ -133,8 +145,21 @@ class EventViewset(ModelViewSet):
             )
         event_date = self.request.query_params.get("date")
         if event_date:
-            event_date = convert_date(event_date)
-            queryset = queryset.filter(event_date__contains=event_date)
+            try:
+                datetime_start = datetime.strptime(
+                    event_date + " 00:00:00", "%Y-%m-%d %H:%M:%S"
+                )
+                datetime_end = datetime.strptime(
+                    event_date + " 23:59:59", "%Y-%m-%d %H:%M:%S"
+                )
+                queryset = queryset.filter(
+                    event_date__range=(datetime_start, datetime_end)
+                )
+            except ValueError:
+                logging.error(
+                    f"Invalid date format in the events search request : {event_date}"
+                )
+                raise Http404
 
         return queryset
 

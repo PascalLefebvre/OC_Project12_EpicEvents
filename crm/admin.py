@@ -14,4 +14,10 @@ class Contract(admin.ModelAdmin):
         "status",
         "amount",
         "payment_due",
+        "date_created",
+        "date_updated",
+    ]
+    readonly_fields = [
+        "date_created",
+        "date_updated",
     ]
