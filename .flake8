@@ -1,0 +1,5 @@
+[flake8]
+exclude = .git,.venv,log,__pycache__,migrations,fixtures,flake_report
+max-line-length = 79
+format = html
+htmldir = ./flake_report

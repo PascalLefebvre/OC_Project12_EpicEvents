@@ -69,3 +69,11 @@
 
 * [Access to the Postman API documentation here](https://documenter.getpostman.com/view/25323756/2s93RZNW2Y)
 
+
+## Linting
+
+* Type `flake8`
+
+* Open the HTML report located in `./flake_report/index.html` file.
+
+

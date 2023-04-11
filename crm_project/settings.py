@@ -146,6 +146,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "crm.utils.custom_exception_handler",
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],

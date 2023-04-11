@@ -6,14 +6,10 @@ from django.http import Http404
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from rest_framework import status
+from rest_framework.response import Response
 
-from crm.permissions_sales import IsClientSalesContact, IsEventSalesContact
-from crm.permissions_support import (
-    IsClientSupportContact,
-    IsEventSupportContact,
-)
-
-from crm.models import Client, Contract, Event
+from crm.models import Client, Contract, ContractStatus, Event
 from crm.serializers import (
     ClientListSerializer,
     ClientDetailSerializer,
@@ -22,20 +18,19 @@ from crm.serializers import (
     EventListSerializer,
     EventDetailSerializer,
 )
+from crm.permissions_sales import IsClientSalesContact, IsEventSalesContact
+from crm.permissions_support import (
+    IsClientSupportContact,
+    IsEventSupportContact,
+)
+from crm.api_exceptions import (
+    InvalidDateFormatException,
+    UnsignedContractException,
+)
 
 logging.basicConfig(
     filename="log/crm.log", encoding="utf-8", level=logging.WARNING
 )
-
-
-def filter_queryset_by_datetime(queryset, date):
-    """"""
-    datetime_start = datetime.strptime(date + " 00:00:00", "%Y-%m-%d %H:%M:%S")
-    datetime_end = datetime.strptime(date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
-    queryset = queryset.filter(
-        date_created__range=(datetime_start, datetime_end)
-    )
-    return queryset
 
 
 class ClientViewset(ModelViewSet):
@@ -104,7 +99,7 @@ class ContractViewset(ModelViewSet):
                 logging.error(
                     f"Invalid date format in the contracts search request : {contract_date}"
                 )
-                raise Http404
+                raise InvalidDateFormatException()
         amount = self.request.query_params.get("amount")
         if amount:
             queryset = queryset.filter(amount=amount)
@@ -159,7 +154,7 @@ class EventViewset(ModelViewSet):
                 logging.error(
                     f"Invalid date format in the events search request : {event_date}"
                 )
-                raise Http404
+                raise InvalidDateFormatException()
 
         return queryset
 
@@ -168,3 +163,23 @@ class EventViewset(ModelViewSet):
             return self.serializer_class
         else:
             return self.detail_serializer_class
+
+    def create(self, request, *args, **kwargs):
+        # The contract must be signed before the event is created.
+        contract_id = request.data.get("contract")
+        contract = Contract.objects.get(id=contract_id)
+        signed_status = ContractStatus.objects.get(state="signed")
+        if contract.status != signed_status:
+            logging.error(
+                f"Status of contract number {contract_id} must be set to 'signed' before creating the event."
+            )
+            raise UnsignedContractException()
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
