@@ -22,7 +22,7 @@ class Client(models.Model):
         related_name="client",
     )
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.company_name} / {self.first_name} {self.last_name} / {self.sales_contact.username}"
@@ -52,7 +52,7 @@ class Contract(models.Model):
     amount = models.FloatField()
     payment_due = models.DateTimeField()
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Contrats"
@@ -79,7 +79,7 @@ class Event(models.Model):
     attendees = models.IntegerField()
     notes = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Evénements"

@@ -51,7 +51,7 @@
 
 * Start up the local Django web server :
 
-    `python manage.py runserver` (the API should respond with the default address "http://127.0.0.1:8000")
+    `python manage.py runserver` (the API should respond with the default address [http://127.0.0.1:8000](http://127.0.0.1:8000))
 
 
 ## Access to the front-end interface from the Django Administration

@@ -13,13 +13,15 @@ class BaseCustomException(APIException):
 
 
 class InvalidDateFormatException(BaseCustomException):
+    """Exception raised when the date query parameter has an invalid format."""
+
     def __init__(self):
         detail = "Invalid date format."
         super().__init__(detail, status.HTTP_400_BAD_REQUEST)
 
 
 class UnsignedContractException(BaseCustomException):
-    """Exception raised when an event ..."""
+    """Exception raised when the contract is not signed before the event is created."""
 
     def __init__(self):
         detail = "The contract must be signed before the event is created."

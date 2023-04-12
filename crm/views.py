@@ -2,7 +2,6 @@ from datetime import datetime
 import logging
 
 from django.db.models import Q
-from django.http import Http404
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
@@ -171,7 +170,7 @@ class EventViewset(ModelViewSet):
         signed_status = ContractStatus.objects.get(state="signed")
         if contract.status != signed_status:
             logging.error(
-                f"Status of contract number {contract_id} must be set to 'signed' before creating the event."
+                f"Status of the contract number {contract_id} must be set to 'signed' before creating the event."
             )
             raise UnsignedContractException()
 
