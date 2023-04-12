@@ -1,5 +1,109 @@
 [
 {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-04-12T12:15:58.472Z",
+        "user": 2,
+        "content_type": 7,
+        "object_id": "6",
+        "object_repr": "Company02 / first02 last02 / vente02",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Mobile\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-04-12T13:55:02.714Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "2",
+        "object_repr": "Signed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-04-12T13:56:11.328Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "1",
+        "object_repr": "Open",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-04-12T13:56:25.720Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "3",
+        "object_repr": "delayed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-04-12T13:56:38.702Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "1",
+        "object_repr": "open",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-04-12T13:56:44.928Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "2",
+        "object_repr": "signed",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-04-12T13:56:53.791Z",
+        "user": 2,
+        "content_type": 9,
+        "object_id": "4",
+        "object_repr": "lost",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"State\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-04-12T13:57:20.514Z",
+        "user": 2,
+        "content_type": 7,
+        "object_id": "7",
+        "object_repr": "Company 03 / First03 Last03 / vente01",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -566,11 +670,27 @@
     }
 },
 {
+    "model": "sessions.session",
+    "pk": "dybxeyxzcys2d0yc0nw33s88qnnfmjxy",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEQEGZcuvcbyPAYqRpISrtq_Hdt0oVu7znnbiLQutSwjjKHKYuLMOL0u0VKz9J2kB_U7l2m3pZ5inJX5EGHvPVcXtfD_TuoNOq3dhbIgWKDrFV0RmVIoBFV9qiJzmBRg3VM6G3i7BMDskcFRSE7b8X7A8FFNx4:1pmag4:TC2eU7TAFU0u6gvjudqkpj2-VRfOf2wvXaOpVhA_vTA",
+        "expire_date": "2023-04-26T13:38:24.758Z"
+    }
+},
+{
     "model": "authtoken.token",
     "pk": "42bd9a4d86c7e9dd908a6ff35364a8864002a84f",
     "fields": {
         "user": 10,
         "created": "2023-04-05T12:11:46.743Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "c28aebfef38897faf4a20de62829664c2a1a6c54",
+    "fields": {
+        "user": 3,
+        "created": "2023-04-12T13:38:24.735Z"
     }
 },
 {
@@ -604,7 +724,7 @@
     "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$390000$Qwfln2HpHuAG1ogMvKF5sF$r77pF1YeASnYlVs85rODz5LrGSG8JrFR5DHbYj07rKU=",
-        "last_login": "2023-04-05T09:39:49.355Z",
+        "last_login": "2023-04-12T13:16:19.494Z",
         "is_superuser": true,
         "username": "gestion01",
         "first_name": "gestion",
@@ -622,7 +742,7 @@
     "pk": 3,
     "fields": {
         "password": "pbkdf2_sha256$390000$nzZLkTuKrvPiks4Q4qi7Ht$02UA3jZoNCZFPjYIBDuP+ei1XSZyVPMc0v8R9lw0vOk=",
-        "last_login": "2023-04-05T13:45:33Z",
+        "last_login": "2023-04-12T13:38:24.755Z",
         "is_superuser": false,
         "username": "vente01",
         "first_name": "vente",
@@ -839,38 +959,38 @@
         "last_name": "last02",
         "email": "first02.last02@email.com",
         "phone": "0515478932",
-        "mobile": "0645897123",
+        "mobile": "0645897124",
         "sales_contact": 5,
         "date_created": "2023-03-31T09:04:06.516Z",
-        "date_updated": "2023-03-31T09:04:06.516Z"
+        "date_updated": "2023-04-12T12:15:58.470Z"
     }
 },
 {
     "model": "crm.contractstatus",
     "pk": 1,
     "fields": {
-        "state": "Ouvert"
+        "state": "open"
     }
 },
 {
     "model": "crm.contractstatus",
     "pk": 2,
     "fields": {
-        "state": "Signé"
+        "state": "signed"
     }
 },
 {
     "model": "crm.contractstatus",
     "pk": 3,
     "fields": {
-        "state": "Retardé"
+        "state": "delayed"
     }
 },
 {
     "model": "crm.contractstatus",
     "pk": 4,
     "fields": {
-        "state": "Perdu"
+        "state": "lost"
     }
 },
 {
