@@ -31,7 +31,7 @@
 
 	```
 	cp .env.example .env
-    python manage.py shell -c "from django.core.management.utils import get_random_secret_key; print(f`SECRET_KEY={get_random_secret_key()}`)" >> .env
+    python manage.py shell -c "from django.core.management.utils import get_random_secret_key; print(f'SECRET_KEY={get_random_secret_key()}')" >> .env
     ```
 
 * Start up the "postgres15" container in detached mode :
@@ -51,7 +51,7 @@
 
 * Start up the local Django web server :
 
-    `python manage.py runserver` (the API should respond with the default address [http://127.0.0.1:8000](http://127.0.0.1:8000))
+    `python manage.py runserver`
 
 
 ## Access to the front-end interface from the Django Administration
