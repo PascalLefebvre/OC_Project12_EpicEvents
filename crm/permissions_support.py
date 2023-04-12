@@ -34,7 +34,8 @@ class IsClientSupportContact(permissions.BasePermission):
 
 
 class IsEventSupportContact(permissions.BasePermission):
-    """Permission to check if the authenticated user is the support contact of the event."""
+    """Permission to check if the authenticated user is the support contact \
+       of the event."""
 
     message = "You're not allowed because you're not the support contact of the event."
 

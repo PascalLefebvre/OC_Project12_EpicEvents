@@ -21,7 +21,8 @@ class InvalidDateFormatException(BaseCustomException):
 
 
 class UnsignedContractException(BaseCustomException):
-    """Exception raised when the contract is not signed before the event is created."""
+    """Exception raised when the contract is not signed before the event is \
+       created."""
 
     def __init__(self):
         detail = "The contract must be signed before the event is created."

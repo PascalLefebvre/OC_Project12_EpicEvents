@@ -25,7 +25,8 @@ class IsClientSalesContact(permissions.BasePermission):
 
 
 class IsEventSalesContact(permissions.BasePermission):
-    """Permission to check if the authenticated user is the sales contact of the client for whom the event is organized."""
+    """Permission to check if the authenticated user is the sales contact \
+       of the client for whom the event is organized."""
 
     message = "You're not allowed because you're not the sales contact of the event client."
 
